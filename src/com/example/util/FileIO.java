@@ -1,6 +1,8 @@
 package com.example.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -184,5 +186,54 @@ public class FileIO {
 
 		fileOrDirectory.delete();
 	}
+	
+	
+	public static byte[] getFileToByteArray(File file){
+		ByteArrayOutputStream bos = null;
+		FileInputStream fis = null;
+		byte[] buffer = null;
+		try {
+			bos = new ByteArrayOutputStream();
+			fis = new FileInputStream(file);
+			byte[] buf = new byte[1024];
+			int len = 0;
+			while((len = fis.read(buf)) != -1){
+				bos.write(buf, 0, len);
+			}
+			buffer = bos.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(bos != null)
+					bos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				bos = null;
+				System.gc();
+			}
+			try {
+				if(fis != null)
+					fis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				fis = null;
+				System.gc();
+			}
+		}
+		return buffer;
+	}
+	
+	public boolean isFileExists(String filePath){
+		return new File(filePath).exists();
+	}
+	
+	
+	public boolean isDictionaryExists(String FolderPath){
+		return new File(FolderPath).isDirectory();
+	}
+	
+	
+
 
 }
