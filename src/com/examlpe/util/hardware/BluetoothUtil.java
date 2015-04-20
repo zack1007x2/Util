@@ -38,7 +38,7 @@ public class BluetoothUtil {
 	 */
 	public void openBluetooth(){
 		if (adapter == null){    
-			Toast.makeText(context, "該機不支持藍牙！", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "不支持藍牙！", Toast.LENGTH_SHORT).show();
 		}
 		if (!adapter.isEnabled()){  
 		    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);  
@@ -48,7 +48,7 @@ public class BluetoothUtil {
 		}
 	}
 	/**
-	 * 取得已經配對的藍牙設配
+	 * 取得已經配對的藍牙設備
 	 * @return
 	 */
 	public Set<BluetoothDevice> getPairedBluetooth(){
@@ -68,12 +68,12 @@ public class BluetoothUtil {
 		adapter.startDiscovery(); 
 	}
 	/**
-	 * 連接到指定的藍牙設配
+	 * 連接到指定的藍牙設備
 	 * @param device
 	 * @throws Exception
 	 */
 	public void connectBluetooth(BluetoothDevice device) throws Exception{
-		 final String SPP_UUID = "00001101-0000-1000-8000-00805F9B34FB";  //可到 http://www.uuidgenerator.com 申請 
+		 final String SPP_UUID = "f58360e5-782e-4aaf-991b-b317859cef21";  //可到  https://www.uuidgenerator.net/ 生成 
 		 UUID uuid = UUID.fromString(SPP_UUID);  
 		 socket = device.createRfcommSocketToServiceRecord(uuid);  
 		 socket.connect();

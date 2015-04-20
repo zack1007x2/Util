@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 /**
  * 加速度感應器
+ * 須配合activity生命週期調用對應方法
  */
 public class AccessSensorUtil implements MySensor {
 	private Context context;
