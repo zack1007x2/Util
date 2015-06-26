@@ -8,9 +8,6 @@ import org.json.JSONObject;
 
 public class Parser {
 	
-	
-	
-	//TODO Array
 	/**
 	 * find difference item of A2
 	 * @param A1
@@ -18,8 +15,8 @@ public class Parser {
 	 * @return difference item of A2
 	 */
 	public static String[] findifference(String[]A1,String[] A2) {
-		ArrayList<String> a1=new ArrayList(Arrays.asList(A1));
-		ArrayList<String> a2=new ArrayList(Arrays.asList(A2));
+		ArrayList<String> a1=new ArrayList<String>(Arrays.asList(A1));
+		ArrayList<String> a2=new ArrayList<String>(Arrays.asList(A2));
 		
 		for( String s : a1){
             a2.remove(s);
@@ -30,7 +27,6 @@ public class Parser {
 	    return diffArr; 
 	}
 
-	//TODO JSON
 	/**
 	 * trim JSON Object
 	 * @param json

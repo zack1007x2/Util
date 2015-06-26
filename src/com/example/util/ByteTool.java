@@ -7,6 +7,7 @@ import android.util.Log;
 
 
 public class ByteTool {
+	
 	public static byte[] appendByteArray(byte[] a , byte[] b){
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
 		try {

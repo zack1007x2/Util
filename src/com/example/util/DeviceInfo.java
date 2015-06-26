@@ -1,12 +1,12 @@
 package com.example.util;
 
 import java.util.Locale;
+
 import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
@@ -82,6 +82,37 @@ public class DeviceInfo {
 			return true;
 		else
 			return false;
+	}
+	
+	public float getBackCameraResolutionInMp()
+	{
+	    int noOfCameras = Camera.getNumberOfCameras();
+	    float maxResolution = -1;
+	    long pixelCount = -1;
+	    for (int i = 0;i < noOfCameras;i++)
+	    {
+	        Camera.CameraInfo cameraInfo = new CameraInfo();
+	        Camera.getCameraInfo(i, cameraInfo);
+
+	        if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK)
+	        {
+	            Camera camera = Camera.open(i);
+	            Camera.Parameters cameraParams = camera.getParameters();
+	            for (int j = 0;j < cameraParams.getSupportedPictureSizes().size();j++)
+	            {
+	                long pixelCountTemp = cameraParams.getSupportedPictureSizes().get(i).width * cameraParams.getSupportedPictureSizes().get(i).height;
+	                if (pixelCountTemp > pixelCount)
+	                {
+	                    pixelCount = pixelCountTemp;
+	                    maxResolution = ((float)pixelCountTemp) / (1024000.0f);
+	                }
+	            }
+
+	            camera.release();
+	        }
+	    }
+
+	    return maxResolution;
 	}
 
 }
